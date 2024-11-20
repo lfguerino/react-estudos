@@ -1,15 +1,18 @@
 import React from 'react';
 
 import Post from './Post';
+import Header from './Header';
 
 function App() {
   return (
     <>
-      <h1>LFGuerino Blog</h1>
-      <h2>Posts da Semana</h2>
-      <hr />
+
+      <Header>
+        <h2>Posts da Semana</h2>
+      </Header>
 
       <Post
+        likes={20}
         post={{
           title: 'Titulo 01',
           subtitle: 'Subtitulo 01'
@@ -17,6 +20,7 @@ function App() {
       />
 
       <Post
+        likes={10}
         post={{
           title: 'Titulo 02',
           subtitle: 'Subtitulo 02'
@@ -24,6 +28,7 @@ function App() {
       />
 
       <Post
+        likes={15}
         post={{
           title: 'Titulo 03',
           subtitle: 'Subtitulo 03'
