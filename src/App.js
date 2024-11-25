@@ -1,14 +1,10 @@
-import React, { useState, createContext } from 'react';
+import React, { useState } from 'react';
 
 import Post from './Post';
 import Header from './Header';
-import PropTypes from 'prop-types';
-
-export const ThemeContext = createContext('dark');
+import { ThemeProvider } from './ThemeContext';
 
 function App() {
-
-  const [theme, setTheme] = useState('dark');
 
   const [posts, setPosts] = useState([
     { id: Math.random(), title: 'Titulo #01', subtitle: 'Subtitle #01', likes: 30, read: false },
@@ -16,13 +12,6 @@ function App() {
     { id: Math.random(), title: 'Titulo #03', subtitle: 'Subtitle #03', likes: 15, read: false },
     { id: Math.random(), title: 'Titulo #04', subtitle: 'Subtitle #04', likes: 40, read: true },
   ]);
-
-  function handleToggleTheme() {
-    setTheme((prevState) =>
-      prevState === 'dark'
-        ? 'light'
-        : 'dark');
-  }
 
   function handleRefresh() {
     setPosts((prevState) => [
@@ -43,11 +32,7 @@ function App() {
   }
 
   return (
-    <ThemeContext.Provider value={{
-      theme,
-      onToggleTheme: handleToggleTheme
-    }}>
-
+    <ThemeProvider>
       <Header>
         <h2>Posts da Semana</h2>
         <button onClick={handleRefresh}>Atualizar</button>
@@ -55,13 +40,12 @@ function App() {
 
       {posts.map(post => (
         <Post
-          theme={theme}
           key={post.id}
           onRemove={handleRemovePost}
           post={post}
         />
       ))}
-    </ThemeContext.Provider>
+    </ThemeProvider>
   );
 }
 

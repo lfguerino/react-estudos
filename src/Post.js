@@ -26,7 +26,6 @@ function Post(props) {
 }
 
 Post.propTypes = {
-  theme: PropTypes.string.isRequired,
   onRemove: PropTypes.func.isRequired,
   post: PropTypes.shape({
     id: PropTypes.number.isRequired,
