@@ -2,16 +2,25 @@ import React, { useState } from 'react';
 
 import Post from './Post';
 import Header from './Header';
+import PropTypes from 'prop-types';
 
 function App() {
 
+  const [theme, setTheme] = useState('dark');
 
   const [posts, setPosts] = useState([
-    { id: Math.random(), title: 'Titulo #01', subtitle: 'Subtitle #01', likes: 30, read: false},
-    { id: Math.random(), title: 'Titulo #02', subtitle: 'Subtitle #02', likes: 10, read: true},
-    { id: Math.random(), title: 'Titulo #03', subtitle: 'Subtitle #03', likes: 15, read: false},
-    { id: Math.random(), title: 'Titulo #04', subtitle: 'Subtitle #04', likes: 40, read: true},
+    { id: Math.random(), title: 'Titulo #01', subtitle: 'Subtitle #01', likes: 30, read: false },
+    { id: Math.random(), title: 'Titulo #02', subtitle: 'Subtitle #02', likes: 10, read: true },
+    { id: Math.random(), title: 'Titulo #03', subtitle: 'Subtitle #03', likes: 15, read: false },
+    { id: Math.random(), title: 'Titulo #04', subtitle: 'Subtitle #04', likes: 40, read: true },
   ]);
+
+  function handleToggleTheme() {
+    setTheme((prevState) =>
+      prevState === 'dark'
+        ? 'light'
+        : 'dark');
+  }
 
   function handleRefresh() {
     setPosts((prevState) => [
@@ -34,13 +43,17 @@ function App() {
   return (
     <>
 
-      <Header>
+      <Header
+        theme={theme}
+        onToggleTheme={handleToggleTheme}
+      >
         <h2>Posts da Semana</h2>
         <button onClick={handleRefresh}>Atualizar</button>
       </Header>
 
       {posts.map(post => (
         <Post
+          theme={theme}
           key={post.id}
           onRemove={handleRemovePost}
           post={post}
