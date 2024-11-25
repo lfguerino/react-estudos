@@ -1,8 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, createContext } from 'react';
 
 import Post from './Post';
 import Header from './Header';
 import PropTypes from 'prop-types';
+
+export const ThemeContext = createContext('dark');
 
 function App() {
 
@@ -41,12 +43,12 @@ function App() {
   }
 
   return (
-    <>
+    <ThemeContext.Provider value={{
+      theme,
+      onToggleTheme: handleToggleTheme
+    }}>
 
-      <Header
-        theme={theme}
-        onToggleTheme={handleToggleTheme}
-      >
+      <Header>
         <h2>Posts da Semana</h2>
         <button onClick={handleRefresh}>Atualizar</button>
       </Header>
@@ -59,7 +61,7 @@ function App() {
           post={post}
         />
       ))}
-    </>
+    </ThemeContext.Provider>
   );
 }
 
