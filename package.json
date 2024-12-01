@@ -22,5 +22,7 @@
     "prop-types": "^15.8.1"
   },
   "dependencies": {
+    "css-loader": "^7.1.2",
+    "style-loader": "^4.0.0"
   }
 }
