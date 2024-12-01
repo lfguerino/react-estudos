@@ -1,6 +1,7 @@
 const path = require('path');
 const HtmlWebPackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const loader = require('css-loader');
 
 module.exports = {
   mode: 'development',
@@ -15,7 +16,7 @@ module.exports = {
     }),
     new CleanWebpackPlugin(),
   ],
-  module:{
+  module: {
     rules: [
       {
         test: /\.js$/,
@@ -23,10 +24,17 @@ module.exports = {
         use: 'babel-loader'
       },
       {
-        test: /\.css$/,
+        test: /\.scss$/,
+        exclude: /node_modules/,
         use: [
-          'style-loader', 
-          'css-loader'
+          'style-loader',
+          {
+            loader: 'css-loader',
+            options: {
+              modules: true
+            }
+          },
+          'sass-loader'
         ]
       }
     ],
